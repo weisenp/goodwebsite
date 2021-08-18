@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Files = require("../../../dbSchema/files");
+const Files = require("../../dbSchema/files");
 const path = require("path");
 const fs = require("fs");
 

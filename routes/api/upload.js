@@ -1,24 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const { nanoid } = require("nanoid");
-const Users = require("../../../dbSchema/users");
+const Users = require("../../dbSchema/users");
 const { a2h } = require("hiddencoder");
-const Files = require("../../../dbSchema/files");
+const Files = require("../../dbSchema/files");
 
 router.post("/upload", async (req, res) => {
   if (!req.files.file) return res.send("Upload screenshot bruh");
   if (!req.query.key) return res.send("Please enter your key.");
   if (!req.query.username) return res.send("Please enter your username");
   let make = true;
-  let usere
+  let usere;
 
   await Users.findOne({ username: req.query.username }, function (err, user) {
     if (err) throw err;
     if (!user) {
-      make = false 
+      make = false;
       return res.send("No user with that username");
     }
-    usere = user
+    usere = user;
 
     if (req.query.key != user.key) return res.send("The key does not match up");
   });
@@ -33,7 +33,7 @@ router.post("/upload", async (req, res) => {
           uploader: req.query.username,
           file: `https://xbox.one/images/${fileName}.png`,
           fileName: a2h(fileName),
-          userDescription: usere.description
+          userDescription: usere.description,
         });
 
         file.save();

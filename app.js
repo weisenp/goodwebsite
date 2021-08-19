@@ -28,6 +28,6 @@ app.use("/api", require("./routes/api/oembed"));
 app.use("/api", require("./routes/api/upload"));
 app.use("/i", require("./routes/i/image"));
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+app.listen(8080, () => {
+  console.log("Server running on port 8080");
 });
